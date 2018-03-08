@@ -1,0 +1,23 @@
+{
+  "name": "swedish-election",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@rematch/core": "^0.5.2",
+    "axios": "^0.18.0",
+    "classnames": "^2.2.5",
+    "d3": "^4.13.0",
+    "ramda": "^0.25.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.1",
+    "topojson-client": "^3.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

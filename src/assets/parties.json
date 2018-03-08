@@ -1,0 +1,11 @@
+[
+  { "name": "Moderaterna", "acronym": "M", "color": "#004b8d" },
+  { "name": "Centerpartiet", "acronym": "C", "color": "#51ba66" },
+  { "name": "Folkpartiet", "acronym": "FP", "color": "#3d70a4" },
+  { "name": "Kristdemokraterna", "acronym": "KD", "color": "#6d94bb" },
+  { "name": "Miljöpartiet", "acronym": "MP", "color": "#379c47" },
+  { "name": "Socialdemokraterna", "acronym": "S", "color": "#d82f27" },
+  { "name": "Vänsterpartiet", "acronym": "V", "color": "#b02327" },
+  { "name": "Sverigedemokraterna", "acronym": "SD", "color": "#e7e518" },
+  { "name": "Övriga", "acronym": "Övriga", "color": "#bdc3c7" }
+]
