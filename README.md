@@ -6,5 +6,6 @@ A toy project to become more accustomed with some technologies:
 - [Rematch](https://github.com/rematch/rematch)
 - [D3](https://d3js.org/)
 - [Ramda](http://ramdajs.com/)
+- [BEM](http://getbem.com/)
 
 [Live demo](https://darfink.github.io/swedish-election/)
