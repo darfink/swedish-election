@@ -6,3 +6,6 @@ body {
 
 .MunicipalityMap__area:hover { fill-opacity: 0.5; stroke-width: 0.5; stroke-opacity: 0.7; }
 .MunicipalityMap__area--selected { fill-opacity: 0.5; stroke-width: 0.5; stroke-opacity: 0.7; }
+
+.ElectionGraph__label { text-anchor: middle; fill: #ccc; font-weight: bold; }
+.ElectionGraph__title { text-anchor: middle; font-size: 1.2em; }
