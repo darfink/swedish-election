@@ -1,66 +1,72 @@
 import React from 'react';
 import classNames from 'classnames';
 import * as d3 from 'd3';
-import parties from '../assets/parties';
 import { findMaxIndex } from '../util';
+import parties from '../assets/parties';
 
 export default class MunicipalityMap extends React.Component {
+  constructor(props) {
+    super(props);
+    this.projection = d3
+      .geoMercator()
+      .scale(945)
+      .translate([props.width * -0.1, props.height * 3.2]);
+  }
+
   componentDidMount() {
-    const svg = d3.select(this.refs.svg);
     const zoom = d3
       .zoom()
       .scaleExtent([1, 10])
-      .on('zoom', this.onMapZoom.bind(this));
-    svg.call(zoom);
-    svg.on('dblclick.zoom', null);
-  }
-
-  onMapZoom() {
-    const g = d3.select(this.refs.g);
-    g.attr('transform', d3.event.transform);
+      .on('zoom', () =>
+        this.refs.g.setAttribute('transform', d3.event.transform),
+      );
+    d3
+      .select(this.refs.svg)
+      .call(zoom)
+      .on('dblclick.zoom', null);
   }
 
   renderMunicipality(municipality) {
-    const { election, selectedMunicipality, selectMunicipality } = this.props;
+    const {
+      currentMunicipality,
+      municipalitiesVotes,
+      selectMunicipality,
+    } = this.props;
 
     const id = municipality.properties.KNKOD;
-    const selected = selectedMunicipality === id;
-    const majorityPartyColor = election
-      ? parties[findMaxIndex(election[id])].color
+    const isSelected = currentMunicipality === id;
+    const majorityPartyColor = municipalitiesVotes
+      ? parties[findMaxIndex(municipalitiesVotes[id])].color
       : '#ccc';
 
     return (
       <path
         key={id}
-        d={d3.geoPath().projection(projection)(municipality)}
-        className={classNames('municipality', { selected })}
+        d={d3.geoPath().projection(this.projection)(municipality)}
+        className={classNames('MunicipalityMap__area', {
+          'MunicipalityMap__area--selected': isSelected,
+        })}
         fill={majorityPartyColor}
-        onClick={() => selectMunicipality(selected ? null : id)}
+        onClick={() => selectMunicipality(isSelected ? null : id)}
       />
     );
   }
 
   render() {
-    const { municipalities } = this.props;
+    const { municipalitiesAreas, width, height } = this.props;
 
     return (
       <svg
-        width={style.width}
-        height={style.height}
-        viewBox={`0 0 ${style.width} ${style.height}`}
+        className="MunicipalityMap"
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
         ref="svg"
       >
-        <g className="municipalities" ref="g" stroke="#fff" strokeWidth="0.01">
-          {municipalities.map(this.renderMunicipality.bind(this))}
+        <g ref="g" stroke="#fff" strokeWidth="0.01">
+          {municipalitiesAreas.map(this.renderMunicipality.bind(this))}
         </g>
       </svg>
     );
   }
 }
-
-const style = { width: 560, height: 500 };
-
-const projection = d3
-  .geoMercator()
-  .scale(945)
-  .translate([style.width * -0.1, style.height * 3.2]);

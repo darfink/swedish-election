@@ -4,12 +4,12 @@ import MunicipalityMap from '../components/MunicipalityMap';
 const mapStateToProps = ({
   topology,
   municipality,
-  electionData,
+  electionStats,
   electionYear,
 }) => ({
-  election: electionData[electionYear],
-  selectedMunicipality: municipality,
-  municipalities: topology,
+  currentMunicipality: municipality,
+  municipalitiesAreas: topology,
+  municipalitiesVotes: electionStats[electionYear],
 });
 
 const mapDispatchToProps = ({ municipality: { selectMunicipality } }) => ({

@@ -4,5 +4,5 @@ body {
   font-family: sans-serif;
 }
 
-.municipality:hover { fill-opacity: 0.5; stroke-width: 0.5; stroke-opacity: 0.7; }
-.municipality.selected { fill-opacity: 0.5; stroke-width: 0.5; stroke-opacity: 0.7; }
+.MunicipalityMap__area:hover { fill-opacity: 0.5; stroke-width: 0.5; stroke-opacity: 0.7; }
+.MunicipalityMap__area--selected { fill-opacity: 0.5; stroke-width: 0.5; stroke-opacity: 0.7; }

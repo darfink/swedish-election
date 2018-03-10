@@ -1,10 +1,10 @@
 import React from 'react';
-import TopojsonMap from '../containers/TopojsonMap';
+import MunicipalityMapContainer from '../containers/MunicipalityMapContainer';
 import ElectionYearPicker from '../containers/ElectionYearPicker';
 
 export default () => (
   <div className="App">
-    <TopojsonMap />
+    <MunicipalityMapContainer width={560} height={500} />
     <div className="ElectionYear">
       <p className="ElectionYear__title">Select year</p>
       <hr />
