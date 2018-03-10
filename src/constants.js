@@ -1,4 +1,4 @@
-import electionSummary from './assets/summary';
+import electionSummary from './assets/elections';
 
 export const electionYears = Object.keys(electionSummary)
   .map(Number)
