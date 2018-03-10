@@ -9,6 +9,8 @@ const transformMunicipality = R.compose(
   R.slice(0, parties.length),
 );
 
+// Transforms the CSV input to an organized tree hierarchy.
+// Order: Election Year → Municipality → Party → Voting Share
 const transformData = R.compose(
   R.map(transformMunicipality),
   R.groupBy(([region]) => region.split(' ')[0]),

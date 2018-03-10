@@ -2,25 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { init } from '@rematch/core';
 import { Provider } from 'react-redux';
+import { electionYears } from './constants';
+import { fetchElectionStatsForYear, fetchTopojson } from './actions';
 import './assets/style.css';
 import * as models from './models';
-import { electionYears, dataUrl } from './constants';
 import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
 
 const store = init({ models });
 
-store.dispatch({
-  type: 'topology/fetchTopojson',
-  payload: `${dataUrl}/sweden.topojson`,
-});
+// Retrieve the topography for the country
+store.dispatch(fetchTopojson('sweden'));
 
-electionYears.forEach(payload =>
-  store.dispatch({
-    type: 'electionData/fetchStatsForYear',
-    payload,
-  }),
-);
+// Retrieve the CSV file for each registered election year
+electionYears.map(fetchElectionStatsForYear).forEach(store.dispatch);
 
 const Root = () => (
   <Provider store={store}>
