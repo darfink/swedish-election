@@ -8,4 +8,6 @@ A toy project to become more accustomed with some technologies:
 - [Ramda](http://ramdajs.com/)
 - [BEM](http://getbem.com/)
 
-[Live demo](https://darfink.github.io/swedish-election/)
+View the [live demo](https://darfink.github.io/swedish-election/).
+
+Inspiration from: [ettlitetlov](https://github.com/ettlitetlov).
