@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default ({ size, selectedValue, selectIndex }) => (
-  <form>
+export default ({ size, selectedValue, selectIndex, ...other }) => (
+  <form {...other}>
     <input
       type="range"
       min={0}
