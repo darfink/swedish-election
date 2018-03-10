@@ -1,3 +1,4 @@
+import tippy from 'tippy.js';
 import React from 'react';
 import classNames from 'classnames';
 import * as d3 from 'd3';
@@ -26,6 +27,10 @@ export default class MunicipalityMap extends React.Component {
       .on('dblclick.zoom', null);
   }
 
+  componentDidUpdate() {
+    tippy('.MunicipalityMap__area');
+  }
+
   renderMunicipality(municipality) {
     const {
       currentMunicipality,
@@ -40,15 +45,17 @@ export default class MunicipalityMap extends React.Component {
       : '#ccc';
 
     return (
-      <path
-        key={id}
-        d={d3.geoPath().projection(this.projection)(municipality)}
-        className={classNames('MunicipalityMap__area', {
-          'MunicipalityMap__area--selected': isSelected,
-        })}
-        fill={majorityPartyColor}
-        onClick={() => selectMunicipality(isSelected ? null : id)}
-      />
+      <g key={id}>
+        <path
+          d={d3.geoPath().projection(this.projection)(municipality)}
+          className={classNames('MunicipalityMap__area', {
+            'MunicipalityMap__area--selected': isSelected,
+          })}
+          fill={majorityPartyColor}
+          title={municipality.properties.KNNAMN}
+          onClick={() => selectMunicipality(isSelected ? null : id)}
+        />
+      </g>
     );
   }
 
