@@ -6,8 +6,8 @@ import ElectionGraphContainer from '../containers/ElectionGraphContainer';
 export default () => (
   <div className="App">
     <MunicipalityMapContainer width={560} height={500} />
-    <div className="ElectionYear">
-      <p className="ElectionYear__caption">Select year</p>
+    <div className="App__control">
+      <p>Select year</p>
       <hr />
       <ElectionYearPicker />
     </div>

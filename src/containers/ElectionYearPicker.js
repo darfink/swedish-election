@@ -3,6 +3,7 @@ import { electionYears } from '../constants';
 import ArraySelector from '../components/ArraySelector';
 
 const mapStateToProps = ({ electionYear }) => ({
+  className: 'ElectionYearPicker',
   selectedValue: electionYear,
   size: electionYears.length,
 });
