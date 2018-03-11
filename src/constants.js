@@ -4,4 +4,4 @@ export const electionYears = Object.keys(electionSummary)
   .map(Number)
   .sort();
 
-export const dataUrl = '/data';
+export const dataUrl = `${process.env.PUBLIC_URL}/data`;
