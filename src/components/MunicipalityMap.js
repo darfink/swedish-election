@@ -6,29 +6,28 @@ import { findMaxIndex } from '../util';
 import parties from '../assets/parties';
 
 export default class MunicipalityMap extends React.Component {
-  constructor(props) {
-    super(props);
-    this.projection = d3
-      .geoMercator()
-      .scale(945)
-      .translate([props.width * -0.1, props.height * 3.2]);
-  }
-
   componentDidMount() {
+    const { map, svg } = this.refs;
     const zoom = d3
       .zoom()
       .scaleExtent([1, 10])
-      .on('zoom', () =>
-        this.refs.g.setAttribute('transform', d3.event.transform),
-      );
+      .on('zoom', () => map.setAttribute('transform', d3.event.transform));
     d3
-      .select(this.refs.svg)
+      .select(svg)
       .call(zoom)
       .on('dblclick.zoom', null);
   }
 
   componentDidUpdate() {
     tippy('.MunicipalityMap__area');
+  }
+
+  projection() {
+    const { width, height } = this.props;
+    return d3
+      .geoMercator()
+      .scale(945)
+      .translate([width * -0.1, height * 3.2]);
   }
 
   renderMunicipality(municipality) {
@@ -47,7 +46,7 @@ export default class MunicipalityMap extends React.Component {
     return (
       <g key={id}>
         <path
-          d={d3.geoPath().projection(this.projection)(municipality)}
+          d={d3.geoPath().projection(this.projection())(municipality)}
           className={classNames('MunicipalityMap__area', {
             'MunicipalityMap__area--selected': isSelected,
           })}
@@ -70,7 +69,7 @@ export default class MunicipalityMap extends React.Component {
         viewBox={`0 0 ${width} ${height}`}
         ref="svg"
       >
-        <g ref="g" stroke="#fff" strokeWidth="0.01">
+        <g ref="map" stroke="#fff" strokeWidth="0.01">
           {municipalitiesAreas.map(this.renderMunicipality.bind(this))}
         </g>
       </svg>

@@ -7,24 +7,8 @@ export default class ElectionGraph extends React.Component {
     margin: { left: 20, top: 20, right: 20, bottom: 20 },
   };
 
-  constructor(props) {
-    super(props);
-
-    this.scale = {
-      x: d3
-        .scaleBand()
-        .domain(parties.map(p => p.acronym))
-        .padding(0.3)
-        .range([0, this.innerWidth()]),
-      y: d3
-        .scaleLinear()
-        .domain([0, 65])
-        .range([this.innerHeight(), 0]),
-    };
-  }
-
   componentDidMount() {
-    const { x, y } = this.scale;
+    const { x, y } = this.scale();
     d3.select(this.refs.axisX).call(d3.axisBottom(x));
     d3.select(this.refs.axisY).call(d3.axisLeft(y));
 
@@ -54,7 +38,7 @@ export default class ElectionGraph extends React.Component {
   }
 
   componentDidUpdate() {
-    const { y } = this.scale;
+    const { y } = this.scale();
     const graph = d3.select(this.refs.graph);
     const votes = this.partyVotes();
 
@@ -71,12 +55,26 @@ export default class ElectionGraph extends React.Component {
       .data(votes)
       .transition()
       .duration(750)
+      .attr('y', p => y(p.votes))
       .tween('text', function(p) {
         const i = d3.interpolateNumber(parseFloat(this.textContent), p.votes);
         const format = t => d3.format('0.01%')(i(t).toFixed(1) / 100);
         return t => (this.textContent = format(t));
-      })
-      .attr('y', p => y(p.votes));
+      });
+  }
+
+  scale() {
+    return {
+      x: d3
+        .scaleBand()
+        .domain(parties.map(p => p.acronym))
+        .padding(0.3)
+        .range([0, this.innerWidth()]),
+      y: d3
+        .scaleLinear()
+        .domain([0, 65])
+        .range([this.innerHeight(), 0]),
+    };
   }
 
   innerWidth() {
