@@ -44,17 +44,16 @@ export default class MunicipalityMap extends React.Component {
       : '#ccc';
 
     return (
-      <g key={id}>
-        <path
-          d={d3.geoPath().projection(this.projection())(municipality)}
-          className={classNames('MunicipalityMap__area', {
-            'MunicipalityMap__area--selected': isSelected,
-          })}
-          fill={majorityPartyColor}
-          title={municipality.properties.KNNAMN}
-          onClick={() => selectMunicipality(isSelected ? null : id)}
-        />
-      </g>
+      <path
+        key={id}
+        d={d3.geoPath().projection(this.projection())(municipality)}
+        className={classNames('MunicipalityMap__area', {
+          'MunicipalityMap__area--selected': isSelected,
+        })}
+        fill={majorityPartyColor}
+        title={municipality.properties.KNNAMN}
+        onClick={() => selectMunicipality(isSelected ? null : id)}
+      />
     );
   }
 
